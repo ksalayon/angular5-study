@@ -3,5 +3,5 @@
   id: {{ hero.id }}
 </span>
 <span>
-  name: {{ hero.name | capitalize }}
+  name: <input [(ngModel)]="hero.name" placeholder="name" />
 </span>
