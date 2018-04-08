@@ -6,3 +6,10 @@
     </a>
   </li>
 </ul>
+<div>
+<h3>Add Hero</h3>
+<label>Hero name:
+<input #heroName placeholder="Enter Heroice Name" />
+</label>
+<button (click)="add(heroName.value); heroName.value = ''"> Save </button>
+</div>

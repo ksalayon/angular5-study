@@ -34,7 +34,6 @@ export class HeroService {
   // }
 
   getHero(id: number): Observable<Hero>{
-    this.log(`HeroService: fetching hero with id ${id}`);
     // const hero = HEROES.find(h => h.id === id);
     // return of(hero);
     const heroUrl = `${this.heroesUrl}/${id}`;
@@ -45,13 +44,22 @@ export class HeroService {
   }
 
   updateHero(hero: Hero): Observable<any> {
-    this.log(`HeroService: updating hero`);
     // const hero = HEROES.find(h => h.id === id);
     // return of(hero);
 
     return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>(`updateHero ${hero.id}`))
+    )
+  }
+
+  add(hero: Hero): Observable<any> {
+    // const hero = HEROES.find(h => h.id === id);
+    // return of(hero);
+
+    return this.http.post(this.heroesUrl, hero, httpOptions).pipe(
+      tap(_ => this.log(`added hero name=${hero.name}`)),
+      catchError(this.handleError<Hero>(`added hero ${hero.name}`))
     )
   }
 
