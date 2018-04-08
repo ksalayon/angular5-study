@@ -41,4 +41,13 @@ export class HeroesComponent implements OnInit {
 
   }
 
+  removeHero(hero: Hero): void {
+    //changed this so that it only removes the hero from the component after a successful resolve from the Observable
+    var heroToDelete = this.heroes.find((h) => h === hero);
+    this.heroService.removeHero(hero).subscribe(
+      (hero) => {  this.heroes = this.heroes.filter((h) => h !== heroToDelete) }
+    );
+
+  }
+
 }
