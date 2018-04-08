@@ -7,20 +7,24 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
+import { MessagesComponent } from './messages/messages.component';
+import { MessagesService } from './messages.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     CapitalizePipe,
-    HeroDetailComponent
+    HeroDetailComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
   providers: [
-    HeroService
+    HeroService,
+    MessagesService
   ],
   bootstrap: [AppComponent]
 })
