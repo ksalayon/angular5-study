@@ -20,7 +20,7 @@ export class HeroService {
     private http: HttpClient,
     private messageService: MessagesService) { }
 
-  @throttle(2000)
+  @throttle({hasLog: true})
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
