@@ -4,10 +4,10 @@ import 'rxjs/add/operator/delay';
  import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 
-export function throttle ({time = 2000, hasLog = false} : {time?: number, hasLog?: boolean}) {
+export function throttle ({time = 1000, hasLog = false} : {time?: number, hasLog?: boolean} = {}) {
   return function(target, name, descriptor) {
     let fn = descriptor.value;
-    
+
     var newFn;
 
     if(hasLog) {
@@ -15,9 +15,9 @@ export function throttle ({time = 2000, hasLog = false} : {time?: number, hasLog
         const fnSubject = new BehaviorSubject([]);
         const date = new Date();
         setTimeout(() => {
-          console.log('delay is: ', time);
-          console.log('delayed for ', diff_seconds(new Date(), date) + ' seconds');
+
           fn.apply(this, args).subscribe((o) => {
+            console.log('delayed for ', diff_seconds(new Date(), date) + ' seconds');
             fnSubject.next(o);
           })
         }, time);
@@ -30,9 +30,6 @@ export function throttle ({time = 2000, hasLog = false} : {time?: number, hasLog
         return fn.apply(this, args).delay(time);
       };
     }
-
-
-
 
     descriptor.value = newFn;
     return descriptor;

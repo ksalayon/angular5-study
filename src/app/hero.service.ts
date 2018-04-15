@@ -20,7 +20,7 @@ export class HeroService {
     private http: HttpClient,
     private messageService: MessagesService) { }
 
-  @throttle({hasLog: true})
+  @throttle({})
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
@@ -34,7 +34,7 @@ export class HeroService {
   //   const hero = HEROES.find(h => h.id === id);
   //   return of(hero);
   // }
-
+  @throttle({time:2000, hasLog: true})
   getHero(id: number): Observable<Hero>{
     // const hero = HEROES.find(h => h.id === id);
     // return of(hero);

@@ -33,3 +33,9 @@ button.clear {
   color: #888;
   margin-bottom: 12px;
 }
+
+
+:host {
+  display: block;
+  clear:both;
+}

@@ -15,6 +15,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessagesService } from './messages.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroFormComponent } from './hero-form/hero-form.component';
 
 
 
@@ -25,7 +26,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     CapitalizePipe,
     HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+<div class="hero-form">
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div class="field-group">
+    <label for="name">Hero Name:</label>
+    <input type="text" id="name" name="name"
+    [(ngModel)]="hero.name" #name="ngModel" required>
+    <div class="error" [hidden]="name.valid || name.pristine">
+      <span>Name is required</span>
+    </div>
+  </div>
+  <div class="field-group">
+    <label for="power">Hero Power:</label>
+    <input type="text" id="power" name="power"
+    [(ngModel)]="hero.power" #power="ngModel" required>
+    <div class="error" [hidden]="power.valid || power.pristine">
+      <span>Power is required</span>
+    </div>
+  </div>
+  <button type="submit" [disabled]="!heroForm.form.valid">Save</button>
+</form>
+</div>
