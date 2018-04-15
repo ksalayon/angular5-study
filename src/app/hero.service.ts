@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Hero } from './hero';
 import { MessagesService } from './messages.service';
-import { throttle } from './decorators';
+import { throttle, cache } from './decorators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,7 +20,8 @@ export class HeroService {
     private http: HttpClient,
     private messageService: MessagesService) { }
 
-  @throttle({})
+  // @throttle({})
+  @cache
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
@@ -34,6 +35,8 @@ export class HeroService {
   //   const hero = HEROES.find(h => h.id === id);
   //   return of(hero);
   // }
+  // @throttle({time:2000, hasLog: true})
+  // @cacheDeco
   @throttle({time:2000, hasLog: true})
   getHero(id: number): Observable<Hero>{
     // const hero = HEROES.find(h => h.id === id);

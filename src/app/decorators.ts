@@ -3,6 +3,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
  import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
+import { of } from 'rxjs/observable/of';
 
 export function throttle ({time = 1000, hasLog = false} : {time?: number, hasLog?: boolean} = {}) {
   return function(target, name, descriptor) {
@@ -37,6 +38,26 @@ export function throttle ({time = 1000, hasLog = false} : {time?: number, hasLog
   }
 }
 
+export function cache(target, name, descriptor) {
+  var fn = descriptor.value;
+  let cachedResponse:any;
+  const newFn = function(...args: any[]) {
+
+    let cached = new BehaviorSubject([]);
+    if(!cachedResponse) {
+
+      fn.apply(this, args).subscribe((val, e) => {
+        cachedResponse = val;
+        cached.next(val);
+      })
+
+    }
+    return cached.asObservable();
+  }
+
+  descriptor.value = newFn;
+  return descriptor;
+}
 
 function diff_seconds(dt2, dt1)
 {
